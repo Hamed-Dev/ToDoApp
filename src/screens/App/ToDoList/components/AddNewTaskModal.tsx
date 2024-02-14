@@ -24,11 +24,10 @@ type props = {
 const AddNewTaskModal = ({ open, closeModal, message, callback }: props) => {
     const firstInputRef = createRef()
     const formikRef = useRef(null)
-    const dispatch = useDispatch()
-    const [isModalVisible, setModalVisible] = useState(true);
+
+    
     useEffect(() => {
         firstInputRef.current?.focus()  //// to set first input focused by default
-
     }, [open])
 
 
