@@ -1,5 +1,5 @@
 // package import
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, forwardRef } from 'react'
 import { StyleSheet, TextInput, View, TouchableOpacity, I18nManager, TextInputProps, ViewProps, StyleProp, ViewStyle } from 'react-native'
 
 
@@ -30,7 +30,7 @@ type Props = TextInputProps & ViewProps & {
     constinerStyle?: StyleProp<ViewStyle>;
     lable?: string
 }
-const AppInput = (props: Props) => {
+const AppInput = forwardRef((props: Props, ref: any) => {
     const [inputType, setInputType] = useState(props.secureTextEntry ? true : false)  /// if input is password type 
 
     return (
@@ -48,6 +48,7 @@ const AppInput = (props: Props) => {
                         // <AppIcon type={props.inputIconType} name={props.inputIconName} style={{}} />
                     }
                     <TextInput
+                        ref={ref}
                         {...props}
                         allowFontScaling={false}
                         style={[styles.input, props.style, { width: props.secureTextEntry || props.inputRightIconType ? '83%' : '90%', }]}
@@ -97,7 +98,7 @@ const AppInput = (props: Props) => {
 
         </View>
     )
-}
+})
 
 export default AppInput
 

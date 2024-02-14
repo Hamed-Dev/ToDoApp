@@ -13,9 +13,9 @@ import { hp } from '../utils/dimensions';
 
 const AppButton = (
     props: TouchableOpacityProps &
-        ViewProps & { cancle?: boolean; bg_color?: string; title?: string; primary?: boolean | undefined; containerStyle?: ViewStyle, icon?: string, txtStyle?: object, fontSize?: number | undefined, disabled?: boolean, loading?: boolean },
+        ViewProps & { cancle?: boolean; bg_color?: string; title?: string; primary?: boolean | undefined; containerStyle?: ViewStyle, icon?: string, txtStyle?: object, fontSize?: number | undefined, disabled?: boolean, loading?: boolean, onPress: void },
 ) => {
-    const { bg_color, cancle, title, primary, style, containerStyle, icon, txtStyle, fontSize, loading } = props;
+    const { bg_color, cancle, title, primary, style, containerStyle, icon, txtStyle, fontSize, loading, onPress } = props;
 
     return (
         <View
@@ -24,13 +24,13 @@ const AppButton = (
                     padding: moderateScale(4),
                     width: '100%',
                     alignItems: 'center',
-                    height:hp(9)
+                    height: hp(9)
                 },
                 containerStyle]}>
             <TouchableOpacity
                 disabled={props?.disabled}
                 {...props}
-                onPress={props?.onPress}
+                onPress={onPress}
 
                 style={
                     [

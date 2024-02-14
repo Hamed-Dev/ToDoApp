@@ -9,8 +9,8 @@ interface TasksState {
 
 const initialState: TasksState = {
     data: [
-        { title: 'Task 1', description: 'description 1', status: 'completed' },
-        { title: 'Task 2', description: 'description 2', status: 'incompleted' }],
+        { id: 1, title: 'Task 1', description: 'description 1', status: 'completed' },
+        { id: 2, title: 'Task 2', description: 'description 2', status: 'incompleted' }],
 }
 
 export const tasksSlice = createSlice({
@@ -35,12 +35,13 @@ export const tasksSlice = createSlice({
             return { ...task_data, data: delete_task_data }
         },
 
-        setTaskStatus: (state, action: PayloadAction<any>) => { //////=========  Update Task Status
+        updateTaskStatus: (state, action: PayloadAction<any>) => { //////=========  Update Task Status
             const { task, newStatus } = action.payload
             const task_data = JSON.parse(JSON.stringify(state));
             const mark_task_data = task_data?.data?.filter((item: any) => item?.id == task?.id)
-            mark_task_data['status'] = newStatus
-            return { ...task_data, data: mark_task_data }
+            mark_task_data[0]['status'] = newStatus
+            state.data = task_data.data
+            //return { ...task_data, data: mark_task_data }
         }
     }
 })
@@ -48,7 +49,7 @@ export const tasksSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { initTasks, addToTasks, removeTask, setTaskStatus } = tasksSlice.actions
+export const { initTasks, addToTasks, removeTask, updateTaskStatus } = tasksSlice.actions
 
 
 

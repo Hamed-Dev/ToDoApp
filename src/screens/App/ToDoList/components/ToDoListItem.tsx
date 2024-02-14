@@ -1,9 +1,24 @@
 import React from 'react'
 import { View } from 'react-native'
+import AppView from '../../../../common/AppView'
+import AppText from '../../../../common/AppText'
+import AppButton from '../../../../common/AppButton'
 
-const ToDoListItem = () => {
+type Props = {
+  item?: any,
+  openUpdateModal: any
+}
+const ToDoListItem = ({ item, openUpdateModal }: Props) => {
   return (
-   <View></View>
+    <AppView>
+
+      <AppText>{item?.title}</AppText>
+      <AppText>{item?.description}</AppText>
+      <AppText>{item?.status}</AppText>
+      <AppButton primary title='Update' onPress={() => openUpdateModal({
+        id: item?.item, title: item?.title, description: item?.description, status: item?.status
+      })} />
+    </AppView>
   )
 }
 
