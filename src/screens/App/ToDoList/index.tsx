@@ -1,10 +1,14 @@
 import React, { createRef, useState } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 import ToDoListItem from './components/ToDoListItem'
-import { updateTaskStatus } from '../../../redux/features/tasks/tasksSlice'
+import { addNewTask, updateTaskStatus } from '../../../redux/features/tasks/tasksSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import AppView from '../../../common/AppView'
-import UpdateTaskStatusModal from './components/UpdateTaskStatusModal'
+import UpdateTaskStatusModal from './components/AddNewTaskModal'
+import AddNewTaskModal from './components/AddNewTaskModal'
+import AppButton from '../../../common/AppButton'
+import { wp } from '../../../utils/dimensions'
+import { moderateScale } from '../../../utils/ResponsiveDimentions'
 
 const ToDoList = () => {
   const firstInputRef = createRef()
@@ -14,9 +18,15 @@ const ToDoList = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false)
 
 
-  const updateTaskStatusVoid = () => {
-    dispatch(updateTaskStatus({ task: { id: 1 }, newStatus: 'com' }))
+
+
+
+  //////===== Add New Task
+  const addNewTaskVoid = (values: any) => {
+    dispatch(addNewTask({ task: { title: values?.title, description: values?.description, status: 'incomplete' } }))
+    setShowUpdateModal(false)
   }
+
 
   const showUpdateModalVoid = (value: object) => {
     setShowUpdateModal(true)
@@ -24,7 +34,7 @@ const ToDoList = () => {
   }
 
   return (
-    <AppView >
+    <AppView style={{ flex: 1 }}>
       <FlatList
         data={todoList}
         renderItem={({ item, index }) =>
@@ -33,11 +43,18 @@ const ToDoList = () => {
         }
       />
 
-
-      <UpdateTaskStatusModal open={showUpdateModal} closeModal={() => setShowUpdateModal(false)} callback={updateTaskStatusVoid}
-      data={currentTaskSelected} />
+      <AppButton title='New' primary style={styles.addNewBtn} containerStyle={styles.addNewCon} onPress={() => setShowUpdateModal(true)} />
+      <AddNewTaskModal open={showUpdateModal} closeModal={() => setShowUpdateModal(false)} callback={addNewTaskVoid} />
     </AppView>
   )
 }
 
+const styles = StyleSheet.create({
+  addNewBtn: {
+    width: wp(20), height: wp(20), borderRadius: wp(20) / 2,
+  },
+  addNewCon: {
+    width: wp(20), height: wp(20), borderRadius: wp(20) / 2, position: 'absolute', bottom: moderateScale(20), right: moderateScale(20), alignSelf: 'flex-end'
+  }
+})
 export default ToDoList

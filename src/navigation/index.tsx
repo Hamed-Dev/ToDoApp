@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import SigninScreen from '../screens/Auth/SigninScreen';
 import SplashScreen from '../screens/Auth/SplashScreen';
 import ToDoList from '../screens/App/ToDoList';
+import UpdateTaskScreen from '../screens/App/ToDoList/UpdateTaskScreen';
 
 
 
@@ -31,6 +32,7 @@ const AppStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="ToDoList" component={ToDoList} />
+            <Stack.Screen name="UpdateTask" component={UpdateTaskScreen} />
         </Stack.Navigator>
     );
 };

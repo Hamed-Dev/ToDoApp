@@ -7,6 +7,10 @@ import AppButton from "../../../../common/AppButton";
 import AppView from "../../../../common/AppView";
 import AppInput from "../../../../common/AppInput";
 import { moderateScale } from "../../../../utils/ResponsiveDimentions";
+import { useDispatch } from "react-redux";
+import { addNewTask } from "../../../../redux/features/tasks/tasksSlice";
+import AppText from "../../../../common/AppText";
+import FontsSizes from "../../../../utils/FontsSizes";
 
 
 type props = {
@@ -14,18 +18,19 @@ type props = {
     message?: string,
     closeModal: any,
     callback: any,
-    data: object
 }
 
 
-const UpdateTaskStatusModal = ({ open, closeModal, message, callback }: props) => {
+const AddNewTaskModal = ({ open, closeModal, message, callback }: props) => {
     const firstInputRef = createRef()
     const formikRef = useRef(null)
+    const dispatch = useDispatch()
     const [isModalVisible, setModalVisible] = useState(true);
     useEffect(() => {
         firstInputRef.current?.focus()  //// to set first input focused by default
 
     }, [open])
+
 
 
     return (
@@ -38,13 +43,15 @@ const UpdateTaskStatusModal = ({ open, closeModal, message, callback }: props) =
                 onBackdropPress={closeModal} >
                 <Formik
                     innerRef={formikRef}
-                    initialValues={{ title: '', description: '', status: '' }}
+                    initialValues={{ title: '', description: '' }}
                     validateOnMount={true}
                     onSubmit={values => callback(values)}
                     validationSchema={addNewTaskValidation}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isValid }) => (
                         <AppView style={{ backgroundColor: 'white', padding: moderateScale(10), borderRadius: moderateScale(5) }}>
+
+                            <AppText bold color="black" center size={FontsSizes.font22} style={{ marginBottom: moderateScale(5) }}>New Task</AppText>
                             <AppInput
                                 ref={firstInputRef}
                                 title={'Title'}
@@ -63,15 +70,8 @@ const UpdateTaskStatusModal = ({ open, closeModal, message, callback }: props) =
                                 touched={touched.description}
                                 value={values.description} />
 
-                            <AppInput
 
-                                title={'Status'}
-                                handleChange={handleChange('status')}
-                                handleBlur={handleBlur('status')}
-                                errors={errors.status}
-                                touched={touched.status}
-                                value={values.status} />
-                            <AppButton primary title="Update" onPress={handleSubmit} />
+                            <AppButton primary title="Save" onPress={handleSubmit} />
                         </AppView>
                     )}
                 </Formik>
@@ -82,4 +82,4 @@ const UpdateTaskStatusModal = ({ open, closeModal, message, callback }: props) =
 
 
 
-export default UpdateTaskStatusModal;
+export default AddNewTaskModal;

@@ -10,7 +10,7 @@ interface TasksState {
 const initialState: TasksState = {
     data: [
         { id: 1, title: 'Task 1', description: 'description 1', status: 'completed' },
-        { id: 2, title: 'Task 2', description: 'description 2', status: 'incompleted' }],
+        { id: 2, title: 'Task 2', description: 'description 2', status: 'incomplete' }],
 }
 
 export const tasksSlice = createSlice({
@@ -20,12 +20,16 @@ export const tasksSlice = createSlice({
         initTasks: (state, action) => {
             return action?.payload
         },
-        addToTasks: (state, action: PayloadAction<any>) => { //////======= Add New Task
+        addNewTask: (state, action: PayloadAction<any>) => { //////======= Add New Task
             const { task } = action.payload
             const task_data = JSON.parse(JSON.stringify(state))?.data;
+            const maxId = Math.max(...task_data.map((itm: any) => itm.id))
+            task.id = maxId + 1
+            console.log('MAXID', task)
             task_data?.push(task)
             console.log({ task_data })
-            state.data = task_data
+           // state.data = task_data
+            return { ...task_data, data: task_data }
         },
 
         removeTask: (state, action: PayloadAction<any>) => { //////======== Remove Task
@@ -39,9 +43,9 @@ export const tasksSlice = createSlice({
             const { task, newStatus } = action.payload
             const task_data = JSON.parse(JSON.stringify(state));
             const mark_task_data = task_data?.data?.filter((item: any) => item?.id == task?.id)
-            mark_task_data[0]['status'] = newStatus
+            mark_task_data[0]['status'] = 'completed'
             state.data = task_data.data
-            //return { ...task_data, data: mark_task_data }
+           // return { ...task_data, data: mark_task_data }
         }
     }
 })
@@ -49,7 +53,7 @@ export const tasksSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { initTasks, addToTasks, removeTask, updateTaskStatus } = tasksSlice.actions
+export const { initTasks, addNewTask, removeTask, updateTaskStatus } = tasksSlice.actions
 
 
 

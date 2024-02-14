@@ -24,7 +24,7 @@ const AppButton = (
                     padding: moderateScale(4),
                     width: '100%',
                     alignItems: 'center',
-                    height: hp(9)
+                  // height: hp(9)
                 },
                 containerStyle]}>
             <TouchableOpacity
@@ -42,7 +42,7 @@ const AppButton = (
                         },
                         !!bg_color && { backgroundColor: bg_color, borderColor: bg_color },
                         cancle && { backgroundColor: colors?.cancelled, borderColor: colors?.cancelled, },
-
+primary && {height:hp(6)},
                         style
                     ]
                 }>
@@ -50,9 +50,7 @@ const AppButton = (
                 {!loading ?
                     <>
                         {icon && icon}
-                        <Text size={fontSize ? fontSize : FontsSizes?.font18} bold primary={!primary && !cancle} white={primary || cancle} style={[{ fontSize: FontsSizes?.font16, }, txtStyle]} >
-                            {title}
-                        </Text>
+                        <Text size={fontSize ? fontSize : FontsSizes?.font18} bold primary={!primary && !cancle} white={primary || cancle} style={[{ fontSize: FontsSizes?.font16 }, txtStyle]} >{title}</Text>
                     </>
                     :
                     <ActivityIndicator color={colors.white} size='small' />
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
     screen: {},
     button: {
         backgroundColor: colors?.white,
-        height: hp(6),
         width: '100%',
         borderRadius: moderateScale(3),
         justifyContent: 'center',
