@@ -3,6 +3,8 @@ User can add new request from his location to send this request to maintenance r
 
 
 - clone this code
+* git clone https://github.com/Hamed-Dev/ToDoApp.git
+
 
 - After cloning the code you can install node modules
  * yarn install
