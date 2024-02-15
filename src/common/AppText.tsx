@@ -16,11 +16,12 @@ type Props = {
     center?: boolean,
     justify?:boolean,
     style?:StyleProp<TextStyle> | any,
-    lineHeight?:number
+    lineHeight?:number,
+    isError?:boolean
 }
 
 const AppText = (props: TextProps & Props) => {
-    const {lineHeight:textLineHeight, bold, regular, white, primary, style, size, color, title, center , justify} = props
+    const {lineHeight:textLineHeight, bold, regular, white, primary, style, size, color, title, center , justify,isError} = props
    
     const lineHeight = textLineHeight?  textLineHeight :     style?.fontSize ?  style?.fontSize * 1.4  : size? size*1.4 : FontsSizes?.font14 *1.4
    
@@ -36,6 +37,7 @@ const AppText = (props: TextProps & Props) => {
                 title && styles?.title,
                  center &&{ textAlign: "center" },
                 !!size && { fontSize: size },
+                isError&& {color:'red'},
                 // justify && {textAlign:"justify"},
                 style,
                 {lineHeight: title ?  FontsSizes?.font23 * 1.4: lineHeight }

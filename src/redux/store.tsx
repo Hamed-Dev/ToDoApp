@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import tasksReducer from './features/tasks/tasksSlice'
+import requestsSlice from './features/requests/requestsSlice'
 
 const reuducer = combineReducers({
-  tasks: tasksReducer,
+  requests: requestsSlice,
 })
 
 export const store = configureStore({

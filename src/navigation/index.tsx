@@ -7,8 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSelector } from 'react-redux';
 import SigninScreen from '../screens/Auth/SigninScreen';
 import SplashScreen from '../screens/Auth/SplashScreen';
-import ToDoList from '../screens/App/ToDoList';
-import UpdateTaskScreen from '../screens/App/ToDoList/UpdateTaskScreen';
+import ReuestsList from '../screens/App/ReuestsList';
 
 
 
@@ -31,8 +30,7 @@ const AuthStack = () => {
 const AppStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="ToDoList" component={ToDoList} />
-            <Stack.Screen name="UpdateTask" component={UpdateTaskScreen} />
+            <Stack.Screen name="ReuestsList" component={ReuestsList} />
         </Stack.Navigator>
     );
 };

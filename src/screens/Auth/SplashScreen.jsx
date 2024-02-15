@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, PermissionsAndroid } from 'react-native'
 import globalStyle from '../theme/globalStyle'
 import AppText from '../../common/AppText'
 import FontsSizes from '../../utils/FontsSizes'
 import { useNavigation } from '@react-navigation/native'
 import AppView from '../../common/AppView'
 
+
 const SplashScreen = () => {
   const navigation = useNavigation()
 
-  useEffect(() => {
 
+  useEffect(() => {
     let startingTime = setTimeout(() => {
       navigation.replace("Signin")
     }, 2000);
@@ -19,9 +20,11 @@ const SplashScreen = () => {
       clearTimeout(startingTime)
     }
   }, [])
+
+
   return (
     <AppView flex={1} center >
-      <AppText bold size={FontsSizes.font22 + 10}>To Do APP</AppText>
+      <AppText bold size={FontsSizes.font22 + 10}>Maintenance Requests</AppText>
     </AppView>
   )
 }

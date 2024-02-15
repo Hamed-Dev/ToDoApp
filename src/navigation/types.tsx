@@ -4,8 +4,7 @@ import type { RouteProp } from '@react-navigation/native';
 
 export type RootStack = {
     Signin:undefined;
-    ToDoList:undefined;
-    ToDoListItem:undefined;
+    ReuestsList:undefined;
     Splash:undefined;
     AppStack:undefined
 };

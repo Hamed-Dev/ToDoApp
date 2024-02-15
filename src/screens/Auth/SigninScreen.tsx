@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useRef } from 'react'
+import React, { createRef, useEffect, useRef, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import AppView from '../../common/AppView'
 import AppInput from '../../common/AppInput'
@@ -14,6 +14,7 @@ const SigninScreen = () => {
     const firstInputRef = createRef()
     const formikRef = useRef(null)
     const navigation = useNavigation()
+    const [errorMsg, setErrorMsg] = useState('')
 
     useEffect(() => {
         firstInputRef.current?.focus()  //// to set first input focused by default
@@ -29,11 +30,17 @@ const SigninScreen = () => {
                 innerRef={formikRef}
                 initialValues={{ userName: '', password: '' }}
                 validateOnMount={true}
-                onSubmit={values => navigation.navigate('AppStack')}
+                onSubmit={values => {
+                    (values.userName == 'admin' && values.password == 'admin') ? navigation.navigate('AppStack')
+                        :
+                        setErrorMsg('Invalid username or password')
+                }}
                 validationSchema={signinValidation}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isValid }) => (
                     <AppView style={styles.componentCon}>
+
+                        <AppText isError style={{ marginBottom: moderateScale(5) }}>{errorMsg}</AppText>
                         <AppInput
                             ref={firstInputRef}
                             title={'Email'}
@@ -48,7 +55,7 @@ const SigninScreen = () => {
                             handleChange={handleChange('password')}
                             handleBlur={handleBlur('password')}
                             errors={errors.password}
-                            touched={touched.password} 
+                            touched={touched.password}
                             value={values.password} />
 
                         <AppButton primary title={'Login'} onPress={handleSubmit} />

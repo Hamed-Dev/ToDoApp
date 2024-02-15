@@ -2,16 +2,14 @@ import React, { createRef, useEffect, useMemo, useRef, useState } from "react";
 import { Text, View } from "react-native";
 import Modal from "react-native-modal";
 import { Formik } from "formik";
-import { addNewTaskValidation } from "../../../../inpuValidation/TaskValidation";
+import { addNewRequestValidation } from "../../../../inpuValidation/RequestValidation";
 import AppButton from "../../../../common/AppButton";
 import AppView from "../../../../common/AppView";
 import AppInput from "../../../../common/AppInput";
 import { moderateScale } from "../../../../utils/ResponsiveDimentions";
 import { useDispatch } from "react-redux";
-import { addNewTask } from "../../../../redux/features/tasks/tasksSlice";
 import AppText from "../../../../common/AppText";
 import FontsSizes from "../../../../utils/FontsSizes";
-
 
 type props = {
     open: boolean,
@@ -25,8 +23,10 @@ const AddNewTaskModal = ({ open, closeModal, message, callback }: props) => {
     const firstInputRef = createRef()
     const formikRef = useRef(null)
 
-    
+
+
     useEffect(() => {
+
         firstInputRef.current?.focus()  //// to set first input focused by default
     }, [open])
 
@@ -45,12 +45,12 @@ const AddNewTaskModal = ({ open, closeModal, message, callback }: props) => {
                     initialValues={{ title: '', description: '' }}
                     validateOnMount={true}
                     onSubmit={values => callback(values)}
-                    validationSchema={addNewTaskValidation}
+                    validationSchema={addNewRequestValidation}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isValid }) => (
                         <AppView style={{ backgroundColor: 'white', padding: moderateScale(10), borderRadius: moderateScale(5) }}>
 
-                            <AppText bold color="black" center size={FontsSizes.font22} style={{ marginBottom: moderateScale(5) }}>New Task</AppText>
+                            <AppText bold color="black" center size={FontsSizes.font22} style={{ marginBottom: moderateScale(5) }}>New Request</AppText>
                             <AppInput
                                 ref={firstInputRef}
                                 title={'Title'}

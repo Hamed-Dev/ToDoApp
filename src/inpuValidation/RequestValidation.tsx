@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const addNewTaskValidation = () => {
+export const addNewRequestValidation = () => {
     return yup.object().shape({
         title: yup.string().required('required'),
         description: yup.string().required('Required'),

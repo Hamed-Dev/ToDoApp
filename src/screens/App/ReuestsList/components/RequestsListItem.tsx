@@ -4,30 +4,30 @@ import AppView from '../../../../common/AppView'
 import AppText from '../../../../common/AppText'
 import AppButton from '../../../../common/AppButton'
 import { useDispatch } from 'react-redux'
-import { removeTask, updateTaskStatus } from '../../../../redux/features/tasks/tasksSlice'
+import { removeRequest, updateRequestStatus } from '../../../../redux/features/requests/requestsSlice'
 import colors from '../../../../utils/colors'
 import { hp, wp } from '../../../../utils/dimensions'
 import { moderateScale } from '../../../../utils/ResponsiveDimentions'
 import FontsSizes from '../../../../utils/FontsSizes'
 import statusColors from '../../../../utils/statusColors'
-import { AntDesign, MaterialCommunityIcons } from '../../../../common/AppIcon'
+import {MaterialCommunityIcons } from '../../../../common/AppIcon'
 
 type Props = {
   item?: any,
   openUpdateModal: any
 }
-const ToDoListItem = ({ item }: Props) => {
+const RequestsListItem = ({ item }: Props) => {
   const dispatch = useDispatch()
 
 
   const deleteTaskVoid = () => {
-    dispatch(removeTask({ task: item }))
+    dispatch(removeRequest({ request: item }))
   }
 
 
   ////////======= Set to complete
   const updateTaskVoid = () => {
-    dispatch(updateTaskStatus({ task: item }))
+    dispatch(updateRequestStatus({ request: item }))
   }
 
   return (
@@ -39,12 +39,12 @@ const ToDoListItem = ({ item }: Props) => {
         <AppText bold>Status: <AppText regular color={statusColors[item?.status]}>{item?.status}</AppText></AppText>
       </AppView>
 
-      <AppView spaceBetween center >
+      <AppView spaceBetween style={{alignItems:'flex-end'}} >
         <TouchableOpacity onPress={() => deleteTaskVoid()}>
           <MaterialCommunityIcons name='delete-empty-outline' size={FontsSizes.font22} />
         </TouchableOpacity>
 
-        <AppButton style={styles.completeBtn} txtStyle={styles.buttonTxtStyle} title='Complete' onPress={() => updateTaskVoid()} />
+        {item?.status == 'incomplete' && <AppButton style={styles.completeBtn} txtStyle={styles.buttonTxtStyle} title='Complete' onPress={() => updateTaskVoid()} />}
       </AppView>
 
 
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
     fontSize: FontsSizes.font12,
   }
 })
-export default ToDoListItem
+export default RequestsListItem
