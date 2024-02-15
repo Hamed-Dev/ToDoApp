@@ -1,0 +1,13 @@
+This app for maintenance requests
+User can add new request from his location to send this request to maintenance representative
+
+
+- clone this code
+
+- After cloning the code you can install node modules
+ * yarn install
+
+
+- Access data
+username : admin
+password : admin
